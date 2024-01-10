@@ -8,7 +8,7 @@
 ### Download RABV sequences in FASTA format
 input=input.fasta
 ### Run nucmer to obtain variant file
-ref=NC001542.fasta # The reference SARS-CoV-2 Wuhan Genome
+ref=NC001542.fasta # The NCBI reference Rabies
 dos2unix $input
 nucmer --forward -p nucmer $ref $input
 show-coords -r -c -l nucmer.delta > nucmer.coords
