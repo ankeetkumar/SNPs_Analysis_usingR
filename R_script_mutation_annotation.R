@@ -8,7 +8,7 @@
 ### Download RABV sequences in FASTA format
 input=input.fasta
 ### Run nucmer to obtain variant file
-ref=NC001542.fasta # The NCBI reference Rabies
+ref=NC_003027.fasta # The NCBI reference LSDV
 dos2unix $input
 nucmer --forward -p nucmer $ref $input
 show-coords -r -c -l nucmer.delta > nucmer.coords
@@ -22,16 +22,16 @@ rownames(nucmer) <- paste0("var", 1:nrow(nucmer))
 # Fix IUPAC codes
 table(nucmer$qvar)
 nucmer<-nucmer[!nucmer$qvar%in%c("B","D","H","K","M","N","R","S","V","W","Y"),]
-nrow(nucmer) # 1953814
+nrow(nucmer)
 
 ### Aminoacid variant list ----
 # Load reference sequence
 library(seqinr)
 library(Biostrings)
-refseq<-read.fasta("NC001542_refseq.fasta",forceDNAtolower=FALSE)[[1]]
+refseq<-read.fasta("NC_003027_refseq.fasta",forceDNAtolower=FALSE)[[1]]
 
 # Load GFF3
-gff3<-read.delim("NC_001542_gff3.gff3",as.is=TRUE,skip=2,header=FALSE)
+gff3<-read.delim("NC_003027_gff3.gff3",as.is=TRUE,skip=2,header=FALSE)
 annot<-setNames(gff3[,10],gff3[,9])
 
 header<-c("sample","refpos","refvar","qvar","qpos","qlength","protein","variant","varclass","annotation")
